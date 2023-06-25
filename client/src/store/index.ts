@@ -1,8 +1,8 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import tasksReducer from "./TaskSlice/TaskSlice";
+import todoReducer from "./TodoSlice/TodoSlice";
 
 const rootReducer = combineReducers({
-  tasks: tasksReducer,
+  todos: todoReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

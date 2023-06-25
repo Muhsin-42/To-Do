@@ -1,11 +1,17 @@
-interface Task {
+interface ITodo {
     id: string;
     task: string;
-    description: string
-}
-interface TasksState {
+    description: string;
+  }
+  
+interface ITodoState {
     [x: string]: any;
-    tasks: Task[];
+    todos: ITodo[];
 }
 
-export type { Task, TasksState };
+interface IInputValues{
+    task: string,
+    description: string
+}
+
+export type { ITodo , ITodoState, IInputValues  };

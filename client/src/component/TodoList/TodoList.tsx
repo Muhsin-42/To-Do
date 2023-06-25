@@ -1,27 +1,50 @@
 import { IconButton } from "@mui/material";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
-import { Task } from "../../utils/interfaces";
-import { deleteTask } from "../../store/TaskSlice/TaskSlice";
+import { ITodo  } from "../../utils/interfaces";
+import {  deleteTodo, setTodos } from "../../store/TodoSlice/TodoSlice";
 import { useDispatch } from "react-redux";
+import { todoUrl } from "../../utils/constants";
+import axios from '../../utils/axios'
 
 const TodoList: FC = () =>{
-    const tasks = useSelector((state: RootState)=>state.tasks)
+    const todos = useSelector((state: RootState)=>state.todos)
     const dispatch = useDispatch();
 
-    const handleDelete = (id: string) =>{
-        dispatch(deleteTask(id))
+    const handleDelete = async(id: string) =>{
+        try {
+            console.log('id',id);
+
+            const res = await axios.delete(todoUrl+`/${id}`)
+            dispatch(deleteTodo(id))
+        } catch (error) {
+            
+        }
     }
+
+    const getAllTodos = async () =>{
+        try {
+            const res = await axios.get(todoUrl);
+            console.log('res ',res.data);
+            dispatch(setTodos(res.data))
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }
+
+    useEffect(()=>{
+        getAllTodos();
+    },[]);
 
     return (
         <>
             <div className="custom-scrollbar  h-screen overflow-y-scroll  overflow-x-hidden scroll-m-0 scroll-p-0 scroll">
                     {
-                        tasks && tasks?.map((task: Task)=>{
+                        todos && todos?.map((task: ITodo)=>{
                             return (
-                                <>
                                 <div key={task.id} className="todo flex justify-between text-white bg-purple-400 shadow-2xl rounded-3xl px-8 py-2 w-9/12 m-auto my-2 cursor-pointer">
                                     <div className="left flex flex-col">
                                         <span className="font-extrabold text-xl">{task?.task}</span>
@@ -33,7 +56,6 @@ const TodoList: FC = () =>{
                                         </IconButton>
                                     </div>
                                 </div>
-                                </>
                             )
                         })
                     }
