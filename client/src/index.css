@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.primary-gradient{
+    background: rgb(167,77,251);
+    background: linear-gradient(121deg, rgba(167,77,251,1) 0%, rgba(131,51,188,1) 46%, rgba(188,18,184,1) 100%);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px; 
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+background-color: rgba(64, 16, 77, 0.5); 
+border-radius: 9px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+background-color: rgba(0, 0, 0, 0.1); 
+}
+
+.add-button{
+    height: 50px !important;
+    width: 50px !important;
+    color: rgb(59, 24, 59);
+}
