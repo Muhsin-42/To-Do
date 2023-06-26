@@ -123,12 +123,27 @@ const todoController = {
         searchQuery = { match_all: {} }; // Match all documents
       } else {
         searchQuery = {
-          match_phrase_prefix: {
-            task: {
-              query,
-              slop: 10,
-              max_expansions: 50
-            }
+          bool: {
+            should: [
+              {
+                match_phrase_prefix: {
+                  task: {
+                    query,
+                    slop: 10,
+                    max_expansions: 50
+                  }
+                }
+              },
+              {
+                match_phrase_prefix: {
+                  description: {
+                    query,
+                    slop: 10,
+                    max_expansions: 50
+                  }
+                }
+              }
+            ]
           }
         };
       }
