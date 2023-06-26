@@ -43,15 +43,10 @@ const InputBars: FC = () =>{
         };
       
         try {
-            console.log('hdhhd');
-            
             await axios.post(todoUrl, newTodo);
-            console.log('hdh');
-            
             dispatch(setNewTodo(newTodo));
             formik.resetForm(); // Reset form values
         } catch (error) {
-            console.log(error);
         }
       };
       

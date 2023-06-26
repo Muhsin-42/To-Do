@@ -15,9 +15,7 @@ const TodoList: FC = () =>{
 
     const handleDelete = async(id: string) =>{
         try {
-            console.log('id',id);
-
-            const res = await axios.delete(todoUrl+`/${id}`)
+            await axios.delete(todoUrl+`/${id}`)
             dispatch(deleteTodo(id))
         } catch (error) {
             
@@ -27,11 +25,8 @@ const TodoList: FC = () =>{
     const getAllTodos = async () =>{
         try {
             const res = await axios.get(todoUrl);
-            console.log('res ',res.data);
             dispatch(setTodos(res.data))
         } catch (error) {
-            console.log(error);
-            
         }
     }
 

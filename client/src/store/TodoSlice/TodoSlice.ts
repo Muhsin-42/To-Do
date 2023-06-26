@@ -15,7 +15,6 @@ export const todoSlice = createSlice({
     },
     setNewTodo: (state, action: PayloadAction<ITodo>) => {
       const newTodo = action.payload;
-      console.log(newTodo)
       state.todos.unshift(newTodo);
     },
     deleteTodo: (state, action: PayloadAction<string>) => {
