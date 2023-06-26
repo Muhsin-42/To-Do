@@ -29,7 +29,7 @@ export const validate = (data: any): Joi.ValidationResult => {
     const schema = Joi.object({
       id: Joi.string().required().label('id'),
       task: Joi.string().trim().required().min(3).label('task'),
-      description: Joi.string().label('description')
+      description: Joi.string().allow('').optional().label('description')
     });
     return schema.validate(data);
 };

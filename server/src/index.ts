@@ -5,7 +5,7 @@ import morgan from 'morgan'
 import dotenv from 'dotenv'
 import connectDB from "./utils/connection";
 import todoRoutes from './routes/todoRoutes';
-
+import redisClient from './utils/redis'
 
 const app = express();
 dotenv.config();
@@ -20,10 +20,11 @@ app.use(helmet())
 app.use(morgan('common'))
 
 app.use(cors({
-    origin: [ 'http://localhost:5173','http://127.0.0.1:3000','http://127.0.0.1:4000']
+    origin: [ 'http://localhost:5173']
 }));
   
 
+//routes
 app.use('/api/todo/',todoRoutes);
 
 app.listen(process.env.PORT,()=>{
